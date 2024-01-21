@@ -63,7 +63,8 @@ const FormData = __nccwpck_require__(334);
                 changelogType: changelogFormat,
                 displayName: serverDisplayName,
                 parentFileID: fileID,
-                releaseType: releaseType
+                releaseType: releaseType,
+                isServerPack: true
             });
         }
 
