@@ -56,7 +56,8 @@ const FormData = require('form-data');
                 changelogType: changelogFormat,
                 displayName: serverDisplayName,
                 parentFileID: fileID,
-                releaseType: releaseType
+                releaseType: releaseType,
+                isServerPack: true
             });
         }
 
