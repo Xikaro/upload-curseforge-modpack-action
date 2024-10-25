@@ -1,10 +1,10 @@
 {
   "name": "upload-curseforge-modpack-action",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "main": "index.js",
   "author": "Max Henkel",
   "scripts": {
-    "build": "ncc build index.js --license licenses.txt"
+    "build": "ncc build index.js"
   },
   "dependencies": {
     "@actions/core": "^1.2.6",

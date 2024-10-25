@@ -13,8 +13,8 @@ inputs:
   modpack-server-path:
     description: 'The path to the modpack server zip'
     required: false
-  changelog:
-    description: 'The changelog for the upload'
+  changelog-path:
+    description: 'The path to the changelog file'
     required: false
   changelog-format:
     description: 'The changelog format ["text", "html", "markdown"]'

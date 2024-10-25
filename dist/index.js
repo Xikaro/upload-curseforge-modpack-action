@@ -16,11 +16,12 @@ const FormData = __nccwpck_require__(334);
         const projectID = Number.parseInt(core.getInput('project-id'));
         const modpackPath = core.getInput('modpack-path');
         const modpackServerPath = core.getInput('modpack-server-path');
-        const changelog = core.getInput('changelog');
+        const changelogPath = core.getInput('changelog-path');
         const changelogFormat = core.getInput('changelog-format');
         const gameVersion = core.getInput('game-version');
         const displayName = core.getInput('display-name');
         const serverDisplayName = core.getInput('server-display-name');
+        const changelog = fs.readFileSync(changelogPath, 'utf-8');
         let releaseType = core.getInput('release-type');
 
         if (releaseType) {
@@ -32,6 +33,7 @@ const FormData = __nccwpck_require__(334);
         console.log(`Project ID set to '${projectID}'`);
         console.log(`Modpack path set to '${modpackPath}'`);
         console.log(`Modpack server path set to '${modpackServerPath}'`);
+        console.log(`Changelog path set to '${changelogPath}'`);
 
         let gameVersionID;
         if (gameVersion) {
@@ -43,6 +45,8 @@ const FormData = __nccwpck_require__(334);
             }
             core.endGroup();
         }
+
+
 
         core.startGroup('Upload Modpack');
 
@@ -2152,10 +2156,10 @@ Object.defineProperty(Blob.prototype, Symbol.toStringTag, {
 /**
  * Create FetchError instance
  *
- * @param   String      message      Error message for human
- * @param   String      type         Error type for machine
- * @param   String      systemError  For Node.js system error
  * @return  FetchError
+ * @param message
+ * @param type
+ * @param systemError
  */
 function FetchError(message, type, systemError) {
   Error.call(this, message);
@@ -2191,9 +2195,8 @@ const PassThrough = Stream.PassThrough;
  *
  * Ref: https://fetch.spec.whatwg.org/#body
  *
- * @param   Stream  body  Readable stream
- * @param   Object  opts  Response options
  * @return  Void
+ * @param body
  */
 function Body(body) {
 	var _this = this;

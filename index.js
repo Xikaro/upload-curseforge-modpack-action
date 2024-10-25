@@ -9,7 +9,7 @@ const FormData = require('form-data');
         const projectID = Number.parseInt(core.getInput('project-id'));
         const modpackPath = core.getInput('modpack-path');
         const modpackServerPath = core.getInput('modpack-server-path');
-        const changelog = core.getInput('changelog');
+        const changelogPath = core.getInput('changelog-path');
         const changelogFormat = core.getInput('changelog-format');
         const gameVersion = core.getInput('game-version');
         const displayName = core.getInput('display-name');
@@ -25,6 +25,7 @@ const FormData = require('form-data');
         console.log(`Project ID set to '${projectID}'`);
         console.log(`Modpack path set to '${modpackPath}'`);
         console.log(`Modpack server path set to '${modpackServerPath}'`);
+        console.log(`Changelog path set to '${changelogPath}'`);
 
         let gameVersionID;
         if (gameVersion) {
@@ -37,10 +38,12 @@ const FormData = require('form-data');
             core.endGroup();
         }
 
+        const changelog = fs.readFileSync(changelogPath, 'utf-8');
+
         core.startGroup('Upload Modpack');
 
         const fileID = await upload(projectID, apiToken, modpackPath, {
-            changelog: changelog,
+            changelog: changelogPath,
             changelogType: changelogFormat,
             displayName: displayName,
             gameVersions: gameVersionID ? [gameVersionID] : [],
@@ -52,7 +55,7 @@ const FormData = require('form-data');
 
         if (modpackServerPath) {
             await upload(projectID, apiToken, modpackServerPath, {
-                changelog: changelog,
+                changelog: changelogPath,
                 changelogType: changelogFormat,
                 displayName: serverDisplayName,
                 parentFileID: fileID,
